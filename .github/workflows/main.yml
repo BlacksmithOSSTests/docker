@@ -1,0 +1,29 @@
+name: Build and Push Docker Image
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  build:
+    runs-on: blacksmith-staging
+
+    defaults:
+      run:
+        working-directory: enterprise/couchbase-server/4.0.0
+    steps:
+      # Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Set up Docker Buildx
+      - name: Set up Docker Buildx
+        uses: useblacksmith/setup-buildx-action@try-mount
+
+      # Build and push the Docker image
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: enterprise/couchbase-server/4.0.0
+          file: enterprise/couchbase-server/4.0.0/Dockerfile
+          push: false
