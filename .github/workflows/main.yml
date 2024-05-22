@@ -24,6 +24,6 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: enterprise/couchbase-server/4.0.0
           file: enterprise/couchbase-server/4.0.0/Dockerfile
           push: false
